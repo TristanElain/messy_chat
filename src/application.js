@@ -1,6 +1,15 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var UserForm = require("./components/UserForm");
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import 	UserForm from './components/UserForm'
+import reducer from './reducers'
 
+const store = createStore(reducer);
 
-ReactDOM.render(<UserForm/>, document.getElementById("main"));
+render(
+	<Provider store={store}>
+		<UserForm />
+	</Provider>,
+	document.getElementById("main")
+)

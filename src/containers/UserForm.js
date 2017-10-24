@@ -1,9 +1,12 @@
 var React = require("react");
-var SignUpForm = require("./SignUpForm");
-var LoginForm = require("./LoginForm");
-var Messages = require("./Messages");
-var jwt = require("jsonwebtoken");
-var Alert = require("react-bootstrap/lib/Alert");
+var SignUpForm = require("../components/SignUpForm");
+var LoginForm = require("../components/LoginForm");
+var Messages = require("../components/Messages");
+import {
+	LOGIN_VIEW,
+	CHAT_VIEW,
+	SIGNUP_VIEW
+} from '../reducers/index'
 
 class UserForm extends React.Component {
 	
@@ -134,4 +137,10 @@ class UserForm extends React.Component {
 
 }
 
-module.exports = UserForm;
+const getView = view => {
+	switch(view) {
+		
+	}
+}
+
+export default UserForm;
