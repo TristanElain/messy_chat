@@ -1,5 +1,10 @@
-# Installation du projet
+# Aller voir la version redux
 
+    Une version en redux existe pour cette application mais elle n'est pas terminée.
+    Il est quand même possible de la consulter sur le dépot suivant :
+    https://github.com/TristanElain/messy_chat/tree/redux
+
+# Installation du projet
     npm install
 
 # Compilation des sources

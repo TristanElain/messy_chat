@@ -26,6 +26,7 @@ class UserForm extends React.Component {
 		this.login = this.login.bind(this);
 		this.signup = this.signup.bind(this);
 		this.setProperty = this.setProperty.bind(this);
+		this.disconnect = this.disconnect.bind(this);
         this.error = this.error.bind(this);
 
 	}
@@ -90,6 +91,15 @@ class UserForm extends React.Component {
 		  .catch(error => window.alert(error));	
 	}
 
+	disconnect() {
+		sessionStorage.clear();
+		this.setState({token:'', user: {
+			name: "",
+			image: "",
+			password: ""
+		}});
+	}
+
 	setProperty(event) {
 		let user = this.state.user;
 		user[event.target.name] = event.target.value;
@@ -98,15 +108,6 @@ class UserForm extends React.Component {
 
 
 	render() {
-		let showAlert = () => {
-			if(this.state.alert.show) {
-				console.log(this.state.alert.error);
-				return (<Alert bsStyle="danger">
-					<h4>{this.state.alert.error}</h4>
-					</Alert>);
-			}
-			return "";
-		}
         
 		if(!sessionStorage.getItem("token")){
 			if(this.state.signup) {
@@ -114,7 +115,7 @@ class UserForm extends React.Component {
 					<div className="filer">
 						<SignUpForm user={this.state.user} sign={this.signup.bind(this)} 
 						  change={this.setProperty.bind(this)} login={() => this.setState({signup :false})}/>
-						{showAlert()}
+						
 					</div>
 				);
 			}
@@ -122,14 +123,24 @@ class UserForm extends React.Component {
 				<div className="filer">
 					<LoginForm user={this.state.user} login={this.login.bind(this)}
 					 change={this.setProperty.bind(this)} signup={() => this.setState({signup :true})}/>
-					 {showAlert()}
 				</div>
 			);
 		}
 	
 		
 		return (
+			<div>
+			<nav className="navbar navbar-default" style={{backgroundColor:'#337ab7', color:'black'}}>
+				<div className="container-fluid">
+					<div className="navbar-header">
+						<a className="navbar-brand" style={{color:"white"}}href="#" onClick={this.disconnect}>
+							Déconnexion
+						</a>
+					</div>
+				</div>
+			</nav>
 			<Messages token={this.state.token} userId={jwt.decode(this.state.token).id} error={this.error.bind(this)}/>
+			</div>
 		);
 		
 
