@@ -1,8 +1,8 @@
 var React = require("react");
-var PropTypes = require('prop-types');
+import {Link} from 'react-router-dom';
 
 
-const LoginForm = ({change, login, signup}) => {
+const LoginForm = ({change, login, toSignup}) => {
     return (
     <div id="loginForm" style={{marginTop: 50+'px'}} className="mainbox col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
         <div className="panel panel-info" >
@@ -34,7 +34,7 @@ const LoginForm = ({change, login, signup}) => {
                 <div className="form-group">
                     <div className="col-md-12 control">
                         <div style={{borderTop: '1px solid#888', paddingTop:15+"px", fontSize:85+"%"}} >
-                            Don't have an account!<a id="signup" href="#" onClick={signup}> Sign Up Here</a>
+                            Don't have an account ?!<a href="#" onClick={toSignup}> Sign Up Here</a>
                         </div>
                     </div>
                 </div>    
@@ -44,11 +44,11 @@ const LoginForm = ({change, login, signup}) => {
     </div>
     );
 }
-
+/*
 LoginForm.propTypes = {
     login: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
     signup: PropTypes.func.isRequired
-}
+}*/
 
-module.exports = LoginForm;
+export default LoginForm;

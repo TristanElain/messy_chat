@@ -1,7 +1,7 @@
-var React = require("react");
+import React from 'react';
 
-function ListMessages(props) {
-    let messages = props.messages.sort((m1, m2) => {return m2.date.localeCompare(m1.date)});
+function ListMessages({messages, keyPressed, del, send, userId, write}) {
+    let messagesSorted = messages.sort((m1, m2) => {return m2.date.localeCompare(m1.date)});
 
     return (
         <div className="container" style={{marginTop: 15+'px'}}>
@@ -13,9 +13,9 @@ function ListMessages(props) {
                         </div>
                         <div id="panel-body-chat" className="panel-body" style={{height: 400+'px'}}>
                             <ul className="chat">
-                                {messages.map((message, i) => {
+                                {messagesSorted.map((message, i) => {
                                     let liClassName, spanClassName, strongClassName, smallClassName, pClassName;
-                                    if(props.userId === message.user_id) {
+                                    if(userId === message.user_id) {
                                         liClassName = "right clearfix";
                                         spanClassName = "chat-img pull-right";
                                         strongClassName = "pull-right primary-font";
@@ -38,8 +38,8 @@ function ListMessages(props) {
                                                 <div className="header">
                                                     <strong className={strongClassName}>{message.user.name}</strong> <small className={smallClassName}>
                                                     <span className="glyphicon glyphicon-time"></span>{message.date}   </small>
-                                                    {(props.userId === message.user_id) ? 
-                                                    <i className="glyphicon glyphicon-remove" onClick={() => props.del(message.id)}></i> : ""}
+                                                    {(userId === message.user_id) ? 
+                                                    <i className="glyphicon glyphicon-remove" onClick={() => del(message.id)}></i> : ""}
                                                 </div>
                                                 <p className={pClassName}>{message.message}</p>
                                             </div>
@@ -50,10 +50,10 @@ function ListMessages(props) {
                         </div>
                         <div className="panel-footer">
                             <div className="input-group">
-                                <input id="btn-input-chat" type="text" className="form-control input-sm" onInput={props.write}
-                                     onKeyPress={props.keyPressed} placeholder="Type your message here..." />
+                                <input id="btn-input-chat" type="text" className="form-control input-sm" onInput={write}
+                                     onKeyPress={keyPressed} placeholder="Type your message here..." />
                                 <span className="input-group-btn">
-                                <button className="btn btn-warning btn-sm" onClick={props.send} id="btn-chat">Send</button>
+                                <button className="btn btn-warning btn-sm" onClick={send} id="btn-chat">Send</button>
                                 </span>
                             </div>
                          </div>
@@ -65,4 +65,4 @@ function ListMessages(props) {
     );
 }
 
-module.exports = ListMessages;
+export default ListMessages;

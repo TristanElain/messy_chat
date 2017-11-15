@@ -1,15 +1,26 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import 	UserForm from './components/UserForm'
-import reducer from './reducers'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider, connect } from 'react-redux'
+import thunkMiddleware from 'redux-thunk';
 
-const store = createStore(reducer);
+import reducer from './reducers'
+import routes from './routes';
+import App from './components/App';
+
+const reducers = reducer;
+
+const store = createStore(reducers,
+applyMiddleware(thunkMiddleware));
+
+const unsubscribe = store.subscribe(() =>
+	console.log(store.getState())
+);
+
 
 render(
 	<Provider store={store}>
-		<UserForm />
+		<App />
 	</Provider>,
 	document.getElementById("main")
 )
